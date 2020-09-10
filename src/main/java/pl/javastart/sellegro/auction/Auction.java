@@ -85,4 +85,17 @@ public class Auction {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
+
+    @Override
+    public String toString() {
+        return "Auction{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", carMake='" + carMake + '\'' +
+                ", carModel='" + carModel + '\'' +
+                ", color='" + color + '\'' +
+                ", price=" + price +
+                ", endDate=" + endDate +
+                '}';
+    }
 }

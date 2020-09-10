@@ -14,9 +14,15 @@ public class HomeController {
         this.auctionService = auctionService;
     }
 
+//    @GetMapping("/")
+//    public String home(Model model) {
+//        model.addAttribute("cars", auctionService.find4MostExpensive());
+//        return "home";
+//    }
+
     @GetMapping("/")
-    public String home(Model model) {
-        model.addAttribute("cars", auctionService.find4MostExpensive());
-        return "home";
+    public String home() {
+        auctionService.getAuctions();
+        return null;
     }
 }

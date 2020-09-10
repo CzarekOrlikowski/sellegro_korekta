@@ -23,6 +23,6 @@ public class HomeController {
     @GetMapping("/")
     public String home() {
         auctionService.getAuctions();
-        return null;
+        return "home2";
     }
 }

@@ -42,21 +42,22 @@ public class AuctionService {
     }
 
     public List<Auction> findAllForFilters(AuctionFilters auctionFilters) {
-        return auctions.stream()
+        return auctionRepository.findAll().stream()
                 .filter(auction -> auctionFilters.getTitle() == null || auction.getTitle().toUpperCase().contains(auctionFilters.getTitle().toUpperCase()))
                 .collect(Collectors.toList());
     }
 
     public List<Auction> findAllSorted(String sort) {
-        Comparator<Auction> comparator = Comparator.comparing(Auction::getTitle);
-        if (sort.equals("title")) {
-            comparator = Comparator.comparing(Auction::getTitle);
-        } else if (sort.equals("price")) {
-            comparator = Comparator.comparing(Auction::getPrice);
-        }
 
-        return auctions.stream()
-                .sorted(comparator)
-                .collect(Collectors.toList());
+        if (sort.equals("title")) {
+            return auctionRepository.orderByTitle();
+        } else if (sort.equals("price")) {
+            return auctionRepository.orderByPrice();
+        } else if (sort.equals("color")) {
+            return auctionRepository.orderByColor();
+        } else if (sort.equals("endDate")) {
+            return auctionRepository.orderByEndDate();
+        }
+        return auctionRepository.findAll();
     }
 }

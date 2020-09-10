@@ -1,6 +1,7 @@
 package pl.javastart.sellegro.auction;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,16 +20,10 @@ public class AuctionService {
         this.auctionRepository = auctionRepository;
     }
 
-   public List<Auction> auctions;
+    public List<Auction> auctions;
 
     private static final String[] ADJECTIVES = {"Niesamowity", "Jedyny taki", "IGŁA", "HIT", "Jak nowy",
             "Perełka", "OKAZJA", "Wyjątkowy"};
-
-
-    public AuctionService() {
-        getAuctions();
-        auctions = auctionRepository.findAllBy();
-    }
 
 
     public void getAuctions() {
@@ -42,34 +37,8 @@ public class AuctionService {
         }
     }
 
-//    private void loadData() throws IOException {
-//
-//        auctions = new ArrayList<>();
-//
-//        ClassLoader classloader = Thread.currentThread().getContextClassLoader();
-//        InputStream is = classloader.getResourceAsStream("dane.csv");
-//        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(is));
-//
-//        Random random = new Random();
-//
-//        String line = bufferedReader.readLine(); // skip first line
-//        while ((line = bufferedReader.readLine()) != null) {
-//            String[] data = line.split(",");
-//            long id = Long.parseLong(data[0]);
-//            String randomAdjective = ADJECTIVES[random.nextInt(ADJECTIVES.length)];
-//            String title = randomAdjective + " " + data[1] + " " + data[2];
-//            BigDecimal price = new BigDecimal(data[4].replace("\\.", ","));
-//            LocalDate endDate = LocalDate.parse(data[5]);
-//            Auction auction = new Auction(id, title, data[1], data[2], data[3], price, endDate);
-//            auctions.add(auction);
-//        }
-//    }
-
     public List<Auction> find4MostExpensive() {
-        return auctions.stream()
-                .sorted(Comparator.comparing(Auction::getPrice).reversed())
-                .limit(4)
-                .collect(Collectors.toList());
+        return auctionRepository.find4MostExpensive();
     }
 
     public List<Auction> findAllForFilters(AuctionFilters auctionFilters) {

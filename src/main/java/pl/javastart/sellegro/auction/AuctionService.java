@@ -49,14 +49,15 @@ public class AuctionService {
 
     public List<Auction> findAllSorted(String sort) {
 
-        if (sort.equals("title")) {
-            return auctionRepository.orderByTitle();
-        } else if (sort.equals("price")) {
-            return auctionRepository.orderByPrice();
-        } else if (sort.equals("color")) {
-            return auctionRepository.orderByColor();
-        } else if (sort.equals("endDate")) {
-            return auctionRepository.orderByEndDate();
+        switch (sort) {
+            case "title":
+                return auctionRepository.orderByTitle();
+            case "price":
+                return auctionRepository.orderByPrice();
+            case "color":
+                return auctionRepository.orderByColor();
+            case "endDate":
+                return auctionRepository.orderByEndDate();
         }
         return auctionRepository.findAll();
     }

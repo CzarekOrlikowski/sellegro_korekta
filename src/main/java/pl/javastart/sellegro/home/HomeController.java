@@ -1,5 +1,6 @@
 package pl.javastart.sellegro.home;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,12 +11,14 @@ public class HomeController {
 
     private AuctionService auctionService;
 
+    @Autowired
     public HomeController(AuctionService auctionService) {
         this.auctionService = auctionService;
     }
 
     @GetMapping("/")
     public String home(Model model) {
+        auctionService.getAuctions();
         model.addAttribute("cars", auctionService.find4MostExpensive());
         return "home";
     }

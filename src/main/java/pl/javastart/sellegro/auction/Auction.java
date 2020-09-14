@@ -1,10 +1,14 @@
 package pl.javastart.sellegro.auction;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
+@Entity
 public class Auction {
 
+    @Id
     private Long id;
     private String title;
     private String carMake;
@@ -12,6 +16,9 @@ public class Auction {
     private String color;
     private BigDecimal price;
     private LocalDate endDate;
+
+    public Auction() {
+    }
 
     public Auction(Long id, String title, String carMake, String carModel, String color, BigDecimal price, LocalDate endDate) {
         this.id = id;
@@ -77,5 +84,18 @@ public class Auction {
 
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Auction{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", carMake='" + carMake + '\'' +
+                ", carModel='" + carModel + '\'' +
+                ", color='" + color + '\'' +
+                ", price=" + price +
+                ", endDate=" + endDate +
+                '}';
     }
 }

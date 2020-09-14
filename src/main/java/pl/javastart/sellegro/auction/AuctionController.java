@@ -10,7 +10,7 @@ import java.util.List;
 @Controller
 public class AuctionController {
 
-    private AuctionService auctionService;
+    public AuctionService auctionService;
 
     public AuctionController(AuctionService auctionService) {
         this.auctionService = auctionService;
